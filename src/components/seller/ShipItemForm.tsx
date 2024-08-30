@@ -6,28 +6,24 @@ import {abi, CONTRACT_ADDRESS, SELLER_ADDRESS} from "@/constants";
 import {parseEther} from "viem";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-export const Seller = () => {
+export const ShipItemForm = () => {
   const { writeContractAsync } = useWriteContract();
 
-  const purchaseItem = async (sellerAddress: string, item: string, price: bigint) => {
+  const shipItem = async (txId : number) => {
     await writeContractAsync(
         {
           abi,
           address: CONTRACT_ADDRESS,
-          functionName: "purchaseItem",
+          functionName: "shipItem",
           args: [
-            sellerAddress,
-            item
-          ],
-          value: price
+            txId
+          ]
         }
     );
   };
 
   type FormInputs = {
-    sellerAddress: string;
-    item: string;
-    price: string;
+    txId: number;
   };
 
   const {
@@ -38,21 +34,22 @@ export const Seller = () => {
   } = useForm<FormInputs>();
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    await purchaseItem(data.sellerAddress, data.item, parseEther(data.price));
+    try {
+      await shipItem(data.txId);
+    } catch (error) {
+      alert(`${error.message}`);
+    }
+    reset();
   };
 
   return (
     <>
       <div>
-        <h2>Ship</h2>
+        <h2>Ship Item</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <span>Seller's address</span>
-          <Input defaultValue={SELLER_ADDRESS} {...register("sellerAddress")} />
-          <span>Item</span>
-          <Input defaultValue="Baseball bat" {...register("item")} />
-          <span>Price</span>
-          <Input defaultValue="0.01" {...register("price")} />
-          <button type="submit" >Purchase</button>
+          <span>Order ID</span>
+          <Input {...register("txId")} />
+          <button type="submit" >Ship</button>
         </form>
       </div>
     </>

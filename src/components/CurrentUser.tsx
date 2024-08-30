@@ -9,11 +9,11 @@ import {abi, CONTRACT_ADDRESS, SELLER_ADDRESS} from "@/constants";
 import {formatEther, parseEther} from "viem";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {purchaseItem} from "@/services/EscrowContract";
-import {Buyer} from "@/components/buyer";
-import {Seller} from "@/components/seller";
-import {Escrow} from "@/components/escrow";
+import {Buyer} from "@/components/buyer/buyer";
+import {Seller} from "@/components/seller/seller";
+import {Escrow} from "@/components/escrow/escrow";
 
-export const User = () => {
+export const CurrentUser = () => {
   const account = useAccount()
   const { connectors, connect, status, error } = useConnect()
   const { disconnect } = useDisconnect()
@@ -23,7 +23,7 @@ export const User = () => {
       <div>
         <h2>Account</h2>
 
-        <div className="text-xl">
+        <div>
           status: {account.status}
           <br />
           addresses: {JSON.stringify(account.addresses)}

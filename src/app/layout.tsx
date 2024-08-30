@@ -22,9 +22,6 @@ export default function RootLayout(props: { children: ReactNode }) {
   )
   return (
     <html lang="en">
-      <head>
-        <link href="app/output.css" rel="stylesheet"></link>
-      </head>
       <body className={inter.className}>
         <Providers initialState={initialState}>{props.children}</Providers>
       </body>

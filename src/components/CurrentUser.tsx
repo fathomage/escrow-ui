@@ -12,6 +12,7 @@ import {purchaseItem} from "@/services/EscrowContract";
 import {Buyer} from "@/components/buyer/buyer";
 import {Seller} from "@/components/seller/seller";
 import {Escrow} from "@/components/escrow/escrow";
+import {CheckBalance} from "@/components/seller/CheckBalance";
 
 export const CurrentUser = () => {
   const account = useAccount()
@@ -21,36 +22,33 @@ export const CurrentUser = () => {
   return (
     <>
       <div>
-        <h2>Account</h2>
-
-        <div>
-          status: {account.status}
-          <br />
-          addresses: {JSON.stringify(account.addresses)}
-          <br />
-          chainId: {account.chainId}
-        </div>
-
-        {account.status === 'connected' && (
-          <button type="button" onClick={() => disconnect()}>
-            Disconnect
-          </button>
-        )}
-      </div>
-
-      <div>
-        <h2>Connect</h2>
+        <h2>Wallet</h2>
         {connectors.map((connector) => (
-          <button
-            key={connector.uid}
-            onClick={() => connect({ connector })}
-            type="button"
-          >
-            {connector.name}
-          </button>
+            <button
+                key={connector.uid}
+                onClick={() => connect({ connector })}
+                type="button"
+            >
+              {connector.name}
+            </button>
         ))}
-        <div>{status}</div>
         <div>{error?.message}</div>
+      </div>
+      <div>
+        <h2>User</h2>
+        <table>
+          <tbody>
+            {account.addresses?.map((addr) => (
+                <tr>
+                  <th>Address</th>
+                  <td>{addr}</td>
+                  <td>
+                    <CheckBalance _address={addr} />
+                  </td>
+                </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   )

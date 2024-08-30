@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div className="flex flex-row">
-        <h1>Current User</h1>
+        <h1>Connection</h1>
         <CurrentUser />
         <hr />
 

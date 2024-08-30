@@ -7,33 +7,27 @@ import {readContract} from "@wagmi/core";
 import {getConfig} from "@/wagmi";
 
 export const Escrow = () => {
-  const [balance, setBalance] = useState<bigint>(0n);
-  const [activeTx, setActiveTx] = useState<number>(0);
-  const [completedTx, setCompletedTx] = useState<number>(0);
-
-  const getTotalInEscrow: Promise<bigint> = readContract(getConfig(), {
-    abi,
-    address: CONTRACT_ADDRESS,
-    functionName: "totalInEscrow",
-  });
-
-  const getActiveTx: Promise<number> = readContract(getConfig(), {
-    abi,
-    address: CONTRACT_ADDRESS,
-    functionName: "numActiveTransactions",
-  });
-
-  const getCompletedTx: Promise<number> = readContract(getConfig(), {
-    abi,
-    address: CONTRACT_ADDRESS,
-    functionName: "numCompletedTransactions",
-  });
+  const [balance, setBalance] = useState<bigint>();
+  const [activeTx, setActiveTx] = useState<number>();
+  const [completedTx, setCompletedTx] = useState<number>();
 
   const refreshData = async () => {
     try {
-      setBalance(await getTotalInEscrow);
-      setActiveTx(await getActiveTx);
-      setCompletedTx(await getCompletedTx);
+      setBalance(await readContract(getConfig(), {
+        abi,
+        address: CONTRACT_ADDRESS,
+        functionName: "totalInEscrow",
+      }));
+      setActiveTx(await readContract(getConfig(), {
+        abi,
+        address: CONTRACT_ADDRESS,
+        functionName: "numActiveTransactions",
+      });
+      setCompletedTx(await readContract(getConfig(), {
+        abi,
+        address: CONTRACT_ADDRESS,
+        functionName: "numCompletedTransactions",
+      });
     } catch (error) {
       alert(`${error.message}`);
     }
@@ -55,7 +49,7 @@ export const Escrow = () => {
             </tr>
             <tr>
               <th>Total in escrow</th>
-              <td>{formatEther(balance)} ETH</td>
+              <td>{balance ? formatEther(balance) : ''} ETH</td>
             </tr>
           </tbody>
         </table>

@@ -5,8 +5,6 @@ import {formatEther} from "viem";
 import {useState} from "react";
 import {readContract} from "@wagmi/core";
 import {getConfig} from "@/wagmi";
-import {Input} from "@nextui-org/react";
-import {TxStatus} from "@/types";
 import {SubmitHandler, useForm} from "react-hook-form";
 
 export const Escrow = () => {
@@ -14,7 +12,7 @@ export const Escrow = () => {
   const [activeTx, setActiveTx] = useState<number>();
   const [completedTx, setCompletedTx] = useState<number>();
 
-  const refreshData = () => {
+  const refreshData = async () => {
       setBalance(await readContract(getConfig(), {
         abi,
         address: CONTRACT_ADDRESS,
@@ -40,7 +38,7 @@ export const Escrow = () => {
 
   const onSubmit: SubmitHandler = async (data) => {
     try {
-      refreshData();
+      await refreshData();
     } catch (error) {
       alert(`${error.message}`);
     }

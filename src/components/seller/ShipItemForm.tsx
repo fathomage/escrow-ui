@@ -2,8 +2,7 @@
 
 import {Input} from "@nextui-org/react";
 import {useWriteContract} from 'wagmi'
-import {abi, CONTRACT_ADDRESS, SELLER_ADDRESS} from "@/constants";
-import {parseEther} from "viem";
+import {abi, CONTRACT_ADDRESS} from "@/constants";
 import {SubmitHandler, useForm} from "react-hook-form";
 
 export const ShipItemForm = () => {

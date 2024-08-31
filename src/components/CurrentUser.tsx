@@ -1,17 +1,6 @@
 'use client'
 
-import { Input } from "@nextui-org/react";
-import {useAccount, useConnect, useDisconnect, useWriteContract} from 'wagmi'
-import {readContract} from "@wagmi/core";
-import {getConfig} from "@/wagmi";
-import {useState} from "react";
-import {abi, CONTRACT_ADDRESS, SELLER_ADDRESS} from "@/constants";
-import {formatEther, parseEther} from "viem";
-import { SubmitHandler, useForm } from "react-hook-form";
-import {purchaseItem} from "@/services/EscrowContract";
-import {Buyer} from "@/components/buyer/buyer";
-import {Seller} from "@/components/seller/seller";
-import {Escrow} from "@/components/escrow/escrow";
+import {useAccount, useConnect, useDisconnect} from 'wagmi'
 import {CheckBalance} from "@/components/seller/CheckBalance";
 
 export const CurrentUser = () => {

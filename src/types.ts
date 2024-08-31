@@ -6,19 +6,11 @@ export enum TxStatus {
   CANCELED
 };
 
-export interface ItemPurchasedEvent {
+export interface Event {
+  type: string;
   txId: number;
   buyer: string;
   seller: string;
   item: string;
   price: bigint;
 };
-
-export interface SaleCompletedEvent {
-  txId: number;
-  buyer: string;
-  seller: string;
-  item: string;
-  price: bigint;
-};
-

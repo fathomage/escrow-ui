@@ -7,6 +7,7 @@ import { cookieToInitialState } from 'wagmi'
 
 import { getConfig } from '../wagmi'
 import { Providers } from './providers'
+import Link from "next/link";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +25,13 @@ export default function RootLayout(props: { children: ReactNode }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers initialState={initialState}>{props.children}</Providers>
+        <footer>
+          <br/><br/>
+          <hr />
+          View the source code for this example:&nbsp;
+          <Link className="mx-1" target="_blank" href="https://github.com/fathomage/escrow-ui">Webapp</Link>&nbsp;
+          <Link className="mx-1" target="_blank" href="https://github.com/fathomage/escrow-contract">Smart Contract</Link>
+        </footer>
       </body>
     </html>
   )

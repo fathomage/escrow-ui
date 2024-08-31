@@ -1,31 +1,12 @@
 'use client'
 
-import {Buyer} from "@/components/buyer/buyer";
-import {Seller} from "@/components/seller/seller";
-import {Escrow} from "@/components/escrow/escrow";
-import {CurrentUser} from "@/components/CurrentUser";
+import Link from "next/link";
 
-function App() {
+export default function App() {
   return (
     <>
-      <div className="flex flex-row">
-        <h1>Connection</h1>
-        <CurrentUser />
-        <hr />
-
-        <h1>The Bank</h1>
-        <Escrow />
-        <hr />
-
-        <h1>The Buyer</h1>
-        <Buyer />
-        <hr />
-
-        <h1>The Seller</h1>
-        <Seller />
-      </div>
+      <h1>Welcome to the Web3 Escrow Service!</h1>
+      <h2>Are you <Link href="/buyer">buying</Link> or <Link href="/seller">selling</Link>?</h2>
     </>
   )
 }
-
-export default App

@@ -10,8 +10,8 @@ export const CurrentUser = () => {
 
   return (
     <>
-      <div>
-        <h2>Wallet</h2>
+      <b>Wallet </b>
+      <span>
         {connectors.map((connector) => (
             <button
                 key={connector.uid}
@@ -22,9 +22,8 @@ export const CurrentUser = () => {
             </button>
         ))}
         <div>{error?.message}</div>
-      </div>
-      <div>
-        <h2>User</h2>
+      </span>
+      <span>
         <table>
           <tbody>
             {account.addresses?.map((addr) => (
@@ -38,7 +37,7 @@ export const CurrentUser = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </span>
     </>
   )
 };

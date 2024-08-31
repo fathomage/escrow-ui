@@ -54,7 +54,7 @@ export const TrackPurchaseForm = () => {
           <span>Order ID</span>
           <Input {...register("txId")} />
           <button type="submit" >Track</button>
-          <div hidden={!txStatus}>Status = {TxStatus[txStatus]}</div>
+          <span hidden={!txStatus}> Status = {TxStatus[txStatus]}</span>
         </form>
       </div>
     </>

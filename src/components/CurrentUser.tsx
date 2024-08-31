@@ -39,7 +39,7 @@ export const CurrentUser = () => {
         <table>
           <tbody>
             {account.addresses?.map((addr) => (
-                <tr>
+                <tr key={addr}>
                   <th>Address</th>
                   <td>{addr}</td>
                   <td>
